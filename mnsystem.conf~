@@ -1,0 +1,96 @@
+# system-wide defaults
+[DEFAULT]
+cnms.sourcelimit:2
+cnms.secondaryminscore:0.2
+sbs.seed_fn.en:/u/metanet/extraction/seeds/en/seeds
+#sbs.seed_fn.en:/u/metanet/extraction/seeds/en/seeds.govei
+#sbs.seed_fn.es:/u/metanet/extraction/seeds/es/seeds-2014-11-14
+sbs.seed_fn.es:/u/metanet/extraction/seeds/es/seeds
+sbs.seed_fn.ru:/u/metanet/extraction/seeds/ru/seeds
+
+# default m4detect operational mode: for IARPA jun/nov evaluations
+[m4detect]
+targetconcepts:POVERTY,TAXATION,WEALTH,DEMOCRACY,
+    ELECTIONS,GOVERNMENT,BUREAUCRACY
+extractionphases:SBS
+extractionphases.fa:LMS2
+#extractionphases:SBS,CMS
+#extractionphases.fa:LMS2,CMS
+mappingphases:CNMS
+scorethreshold:0.4
+scorethreshold.ru:0.4
+cms.maxsentlength:256
+cms.overridetwcaching:True
+cms.excludedfamilies:Governance schemas,Democracy schemas,
+    Economic Inequality schemas
+cnms.expansiontypes:wn,wik,fn
+
+
+# gmr generation mode for m4detect on general concepts
+[m4detect.gmr.general]
+targetconceptgroups:DEMOCRACY,ECONOMIC INEQUALITY,GOVERNANCE
+targetconcepts:
+casemode:general
+extractionphases.en:SBS,CMS
+extractionphases.es:SBS,CMS
+extractionphases.ru:SBS,CMS
+extractionphases.fa:LMS2,CMS
+#extractionphases.fa:LMS,CMS
+mappingphases:CNMS
+scorethreshold:0.4
+cnms.targetconceptranking:DEMOCRACY,ELECTIONS,BUREAUCRACY,POVERTY,
+    WEALTH,TAXATION,GOVERNMENT
+cnms.expansiontypes:wn,wik,fn
+cnms.expansionscorescale:0.5
+cms.excludedfamilies:Governance schemas,Democracy schemas,
+    Economic Inequality schemas
+
+# gmr generation mode for m4detect on case study concepts
+[m4detect.gmr.case]
+targetconceptgroups:GUN OVERSIGHT
+targetconcepts:
+casemode:case
+mappingphases:CNMS
+scorethreshold:0.4
+cms.excludedfamilies:Governance schemas,Democracy schemas,
+    Economic Inequality schemas,Gun debate
+cnms.targetconceptranking:CONTROL OF GUNS,GUN RIGHTS,GUNS
+cnms.expansiontypes:wn,wik,fn
+cnms.expansionscorescale:0.5
+
+# mode for testing SBS
+[m4detect.sbs]
+targetconcepts:POVERTY,TAXATION,WEALTH,DEMOCRACY,
+    ELECTIONS,GOVERNMENT,BUREAUCRACY
+extractionphases:SBS
+scorethreshold:-0.25
+scorethreshold.ru:-9999.0
+
+[m4detect.gmr.lms2]
+extractionphases.fa:LMS2
+mappingphases:CNMS
+
+[m4detect.lms2]
+extractionphases.fa:LMS2
+
+[m4detect.pre]
+extractionphases:PRE
+defaultresultprefix:pre_
+
+[m4mapping]
+mappingsystems:CNMS,DSMS
+secondarymappingthreshold:0.1
+cnms.targetconceptranking:DEMOCRACY,ELECTIONS,BUREAUCRACY,POVERTY,
+    WEALTH,TAXATION,GOVERNMENT
+cnms.expansiontypes:wn,wik,fn
+cnms.expansionscorescale:0.5
+dsms.defaultrank:2
+dsms.defaultscore:0.10
+
+[gendemodata]
+gmrdb.socket:/tmp/mysql.sock
+gmrdb.username:readonly_user
+gmrdb.password:readme
+mndb.socket:/tmp/mysql.sock
+mndb.username:readonly_user
+mndb.password:readme
